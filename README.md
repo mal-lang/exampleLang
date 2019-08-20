@@ -15,7 +15,9 @@ This project has the following structure:
 
 ## Building exampleLang and running the unit tests
 
-To build exampleLang, you need to have `mal-maven-plugin` installed in your local Maven repository. See the instructions in `README.md` in the `malcompiler` repository for instructions on how to install `mal-maven-plugin`.
+The [MAL compiler](https://github.com/meta-attack-language/malcompiler) compiles MAL specifications (`.mal` files) into different formats, using different backends. The reference backend generates Java code that is suitable for testing purposes and evaluating your language. The securiCAD backend generates a `.jar` file that can be used with [foreseeti](https://www.foreseeti.com/)'s products, including [securiCAD](https://www.foreseeti.com/securicad/), which is a tool that can be used to graphically create models using your language and to simulate attacks on those models.
+
+To build exampleLang, you need to have `mal-maven-plugin` installed in your local Maven repository. Follow the instructions at <https://github.com/meta-attack-language/malcompiler/blob/master/README.md> to install `mal-maven-plugin`.
 
 To build a `.jar` file compatible with securiCAD, two dependencies have to be installed, `corelib` and `simulator`. If you have the `.jar` files `corelib-1.5.1.jar` and `simulator-1.5.1.jar`, they can be installed into your local Maven repository with the following commands:
 
