@@ -23,10 +23,19 @@ limitations under the License.
   <modelVersion>4.0.0</modelVersion>
 
   <groupId>com.foreseeti</groupId>
-  <artifactId>exampleLang</artifactId>
+  <artifactId>examplelang</artifactId>
   <packaging>jar</packaging>
   <version>1.0.0</version>
   <name>exampleLang</name>
+
+  <properties>
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    <malcompiler.version>0.1.0-SNAPSHOT</malcompiler.version>
+    <kernelcad.version>1.5.1</kernelcad.version>
+    <mal.file>exampleLang.mal</mal.file>
+    <mal.securicad.package>com.foreseeti.examplelang</mal.securicad.package>
+    <mal.reference.package>com.foreseeti.test.examplelang</mal.reference.package>
+  </properties>
 
   <profiles>
     <!--
@@ -70,10 +79,6 @@ limitations under the License.
                 <goals>
                   <goal>securicad</goal>
                 </goals>
-                <configuration>
-                  <file>exampleLang.mal</file>
-                  <packageName>com.foreseeti.examplelang</packageName>
-                </configuration>
               </execution>
             </executions>
           </plugin>
@@ -104,10 +109,6 @@ limitations under the License.
                 <goals>
                   <goal>reference</goal>
                 </goals>
-                <configuration>
-                  <file>exampleLang.mal</file>
-                  <packageName>com.foreseeti.test.examplelang</packageName>
-                </configuration>
               </execution>
             </executions>
           </plugin>
@@ -156,20 +157,12 @@ limitations under the License.
                 <goals>
                   <goal>securicad</goal>
                 </goals>
-                <configuration>
-                  <file>exampleLang.mal</file>
-                  <packageName>com.foreseeti.examplelang</packageName>
-                </configuration>
               </execution>
               <execution>
                 <id>generate-test-code</id>
                 <goals>
                   <goal>reference</goal>
                 </goals>
-                <configuration>
-                  <file>exampleLang.mal</file>
-                  <packageName>com.foreseeti.test.examplelang</packageName>
-                </configuration>
               </execution>
             </executions>
           </plugin>
@@ -178,17 +171,11 @@ limitations under the License.
     </profile>
   </profiles>
 
-  <properties>
-    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-    <malcompiler.version>0.1.0-SNAPSHOT</malcompiler.version>
-    <kernelcad.version>1.5.1</kernelcad.version>
-  </properties>
-
   <dependencies>
     <dependency>
       <groupId>org.junit.jupiter</groupId>
       <artifactId>junit-jupiter</artifactId>
-      <version>5.5.0</version>
+      <version>5.5.1</version>
       <scope>test</scope>
     </dependency>
   </dependencies>
