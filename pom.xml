@@ -22,7 +22,7 @@ limitations under the License.
                              http://maven.apache.org/xsd/maven-4.0.0.xsd">
   <modelVersion>4.0.0</modelVersion>
 
-  <groupId>com.foreseeti</groupId>
+  <groupId>org.mal-lang</groupId>
   <artifactId>examplelang</artifactId>
   <packaging>jar</packaging>
   <version>1.0.0</version>
@@ -33,8 +33,8 @@ limitations under the License.
     <malcompiler.version>0.1.0-SNAPSHOT</malcompiler.version>
     <kernelcad.version>1.5.1</kernelcad.version>
     <mal.file>exampleLang.mal</mal.file>
-    <mal.securicad.package>com.foreseeti.examplelang</mal.securicad.package>
-    <mal.reference.package>com.foreseeti.test.examplelang</mal.reference.package>
+    <mal.securicad.package>org.mal_lang.examplelang</mal.securicad.package>
+    <mal.reference.package>org.mal_lang.examplelang.test</mal.reference.package>
   </properties>
 
   <profiles>
@@ -60,17 +60,12 @@ limitations under the License.
           <artifactId>simulator</artifactId>
           <version>${kernelcad.version}</version>
         </dependency>
-        <dependency>
-          <groupId>com.google.guava</groupId>
-          <artifactId>guava</artifactId>
-          <version>27.0.1-jre</version>
-        </dependency>
       </dependencies>
 
       <build>
         <plugins>
           <plugin>
-            <groupId>com.foreseeti.mal</groupId>
+            <groupId>org.mal-lang</groupId>
             <artifactId>mal-maven-plugin</artifactId>
             <version>${malcompiler.version}</version>
             <executions>
@@ -100,7 +95,7 @@ limitations under the License.
       <build>
         <plugins>
           <plugin>
-            <groupId>com.foreseeti.mal</groupId>
+            <groupId>org.mal-lang</groupId>
             <artifactId>mal-maven-plugin</artifactId>
             <version>${malcompiler.version}</version>
             <executions>
@@ -138,17 +133,12 @@ limitations under the License.
           <artifactId>simulator</artifactId>
           <version>${kernelcad.version}</version>
         </dependency>
-        <dependency>
-          <groupId>com.google.guava</groupId>
-          <artifactId>guava</artifactId>
-          <version>27.0.1-jre</version>
-        </dependency>
       </dependencies>
 
       <build>
         <plugins>
           <plugin>
-            <groupId>com.foreseeti.mal</groupId>
+            <groupId>org.mal-lang</groupId>
             <artifactId>mal-maven-plugin</artifactId>
             <version>${malcompiler.version}</version>
             <executions>

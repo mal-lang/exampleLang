@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.foreseeti.test.examplelang;
+package org.mal_lang.examplelang.test;
 
 import core.Asset;
 import core.AttackStep;
