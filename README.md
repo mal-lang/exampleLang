@@ -7,7 +7,7 @@ This project has the following structure:
 * The file `pom.xml` is the Maven configuration file of the project.
 * The directory `src/main/mal` contains the MAL specification `exampleLang.mal`, which is the MAL specification of exampleLang.
 * The directory `src/main/resources/icons` contains SVG icons for the assets in exampleLang.
-* The directory `src/test/java/com/foreseeti/test/examplelang` contains the unit tests of exampleLang.
+* The directory `src/test/java/org/mal_lang/examplelang/test` contains the unit tests of exampleLang.
 
 ## Apache Maven
 
@@ -34,7 +34,7 @@ If you have the above dependencies installed, you can build a securiCAD compatib
 mvn package
 ```
 
-The resulting `.jar` file will be located in `target/exampleLang-1.0.0.jar`.
+The resulting `.jar` file will be located in `target/examplelang-1.0.0.jar`.
 
 ### Only building a securiCAD compatible .jar file
 
@@ -44,7 +44,7 @@ If you don't want to run the unit tests, you can build a securiCAD compatible `.
 mvn package -P build-only
 ```
 
-The resulting `.jar` file will be located in `target/exampleLang-1.0.0.jar`.
+The resulting `.jar` file will be located in `target/examplelang-1.0.0.jar`.
 
 ### Only running the unit tests
 
@@ -70,8 +70,8 @@ To create a new language using exampleLang as a template, you need to do the fol
     * `ACKNOWLEDGEMENTS`
     * `pom.xml`
     * `src/main/mal/exampleLang.mal`
-    * `src/test/java/com/foreseeti/test/examplelang/TestExampleLang.java`
-* Update `README.md` with relevant information about your language. Information about how to use Markdown can be found at <https://guides.github.com/features/mastering-markdown/>.
+    * `src/test/java/org/mal_lang/examplelang/test/TestExampleLang.java`
+* Update `README.md` with relevant information about your language. Information about how to use Markdown can be found at <https://help.github.com/en/articles/basic-writing-and-formatting-syntax>.
 * Update `pom.xml` to reflect your project
   * Update `<groupId>` with a reverse domain name that you can use
     * Example: `com.example`
@@ -86,13 +86,13 @@ To create a new language using exampleLang as a template, you need to do the fol
   * Update `<mal.securicad.package>` with the package name of your language
     * Example: `com.example.mylang`
   * Update `<mal.reference.package>` with the test package name of your language
-    * Example: `com.example.test.mylang`
+    * Example: `com.example.mylang.test`
 * Rename `src/main/mal/exampleLang.mal` to the name of the main MAL specification of your language
   * `mv src/main/mal/exampleLang.mal src/main/mal/myLang.mal`
 * Update your main MAL specification's `#id` and `#version`
   * Example: `#id: "com.example.mylang"`, `#version: "1.0.0"`
-* Rename `src/test/java/com/foreseeti/test/examplelang/TestExampleLang.java` to reflect your language
-  * `mkdir -p src/test/java/com/example/test/mylang`
-  * `mv src/test/java/com/foreseeti/test/examplelang/TestExampleLang.java src/test/java/com/example/test/mylang/TestMyLang.java`
+* Rename `src/test/java/org/mal_lang/examplelang/test/TestExampleLang.java` to reflect your language
+  * `mkdir -p src/test/java/com/example/mylang/test`
+  * `mv src/test/java/org/mal_lang/examplelang/test/TestExampleLang.java src/test/java/com/example/mylang/test/TestMyLang.java`
 * Change the package name of the unit tests to the test package name of your language
-  * Example: `package com.example.test.mylang;`
+  * Example: `package com.example.mylang.test;`
