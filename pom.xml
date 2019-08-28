@@ -28,10 +28,23 @@ limitations under the License.
   <version>1.0.0</version>
   <name>exampleLang</name>
 
+  <repositories>
+    <repository>
+      <id>maven.foreseeti.com.release</id>
+      <url>s3://maven.foreseeti.com/release</url>
+    </repository>
+    <repository>
+      <id>maven.foreseeti.com.snapshot</id>
+      <url>s3://maven.foreseeti.com/snapshot</url>
+    </repository>
+  </repositories>
+
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     <malcompiler.version>0.1.0-SNAPSHOT</malcompiler.version>
-    <kernelcad.version>1.5.1</kernelcad.version>
+    <kernelcad.version>1.5.1-SNAPSHOT</kernelcad.version>
+    <corelib.version>${kernelcad.version}</corelib.version>
+    <simulator.version>${kernelcad.version}</simulator.version>
     <mal.file>exampleLang.mal</mal.file>
     <mal.securicad.package>org.mal_lang.examplelang</mal.securicad.package>
     <mal.reference.package>org.mal_lang.examplelang.test</mal.reference.package>
@@ -53,12 +66,12 @@ limitations under the License.
         <dependency>
           <groupId>com.foreseeti</groupId>
           <artifactId>corelib</artifactId>
-          <version>${kernelcad.version}</version>
+          <version>${corelib.version}</version>
         </dependency>
         <dependency>
           <groupId>com.foreseeti</groupId>
           <artifactId>simulator</artifactId>
-          <version>${kernelcad.version}</version>
+          <version>${simulator.version}</version>
         </dependency>
       </dependencies>
 
@@ -126,12 +139,12 @@ limitations under the License.
         <dependency>
           <groupId>com.foreseeti</groupId>
           <artifactId>corelib</artifactId>
-          <version>${kernelcad.version}</version>
+          <version>${corelib.version}</version>
         </dependency>
         <dependency>
           <groupId>com.foreseeti</groupId>
           <artifactId>simulator</artifactId>
-          <version>${kernelcad.version}</version>
+          <version>${simulator.version}</version>
         </dependency>
       </dependencies>
 
@@ -180,6 +193,24 @@ limitations under the License.
       </resource>
     </resources>
     <plugins>
+      <plugin>
+        <groupId>com.allogy.maven.wagon</groupId>
+        <artifactId>maven-s3-wagon</artifactId>
+        <version>1.1.0</version>
+        <extensions>true</extensions>
+        <dependencies>
+          <dependency>
+            <groupId>javax.xml.bind</groupId>
+            <artifactId>jaxb-api</artifactId>
+            <version>2.3.1</version>
+          </dependency>
+          <dependency>
+            <groupId>org.glassfish.jaxb</groupId>
+            <artifactId>jaxb-runtime</artifactId>
+            <version>2.3.1</version>
+          </dependency>
+        </dependencies>
+      </plugin>
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-compiler-plugin</artifactId>

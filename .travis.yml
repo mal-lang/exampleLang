@@ -1,36 +1,28 @@
 language: java
 dist: bionic
-jdk: openjdk12
+jdk: openjdk11
 
 git:
   quiet: true
 
 before_install:
   - echo "Cloning malcompiler dependencies..."
-  - git clone --quiet --depth 1 https://github.com/mal-lang/maven-jlink-plugin.git
   - git clone --quiet --depth 1 https://github.com/mal-lang/javapoet.git
-  - git clone --quiet --depth 1 https://github.com/mal-lang/svgSalamander.git
   - echo "Cloning malcompiler..."
   - git clone --quiet --depth 1 https://github.com/mal-lang/malcompiler.git
 
 install:
   - echo "Installing malcompiler dependencies..."
-  - cd maven-jlink-plugin
-  - mvn install --quiet --batch-mode --define maven.test.skip=true
-  - cd ../javapoet
-  - mvn install --quiet --batch-mode --define maven.test.skip=true
-  - cd ../svgSalamander/svg-core
+  - cd javapoet
   - mvn install --quiet --batch-mode --define maven.test.skip=true
   - echo "Installing malcompiler..."
-  - cd ../../malcompiler
+  - cd ../malcompiler
   - mvn install --quiet --batch-mode --define maven.test.skip=true
   - cd ..
 
 before_script:
   - echo "Cleaning up cloned dependencies"
-  - rm -rf maven-jlink-plugin
   - rm -rf javapoet
-  - rm -rf svgSalamander
   - rm -rf malcompiler
 
 script:
