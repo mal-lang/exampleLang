@@ -19,16 +19,32 @@ The [MAL compiler](https://github.com/meta-attack-language/malcompiler) compiles
 
 To build exampleLang, you need to have `mal-maven-plugin` installed in your local Maven repository. Follow the instructions at <https://github.com/meta-attack-language/malcompiler/blob/master/README.md> to install `mal-maven-plugin`.
 
-To build a `.jar` file compatible with securiCAD, two dependencies have to be installed, `corelib` and `simulator`. If you have the `.jar` files `corelib-1.5.1.jar` and `simulator-1.5.1.jar`, they can be installed into your local Maven repository with the following commands:
+To build a `.jar` file compatible with securiCAD, you need access to foreseeti's maven repository. If you have a username and a password, you need to enter them into `~/.m2/settings.xml`. Here is an example of how `settings.xml` can look:
 
-```
-mvn install:install-file -Dfile=corelib-1.5.1.jar -DgroupId=com.foreseeti -DartifactId=corelib -Dversion=1.5.1 -Dpackaging=jar 
-mvn install:install-file -Dfile=simulator-1.5.1.jar -DgroupId=com.foreseeti -DartifactId=simulator -Dversion=1.5.1 -Dpackaging=jar
+```xml
+<?xml version="1.0" encoding="UTF-8"?>
+<settings xsi:schemaLocation="http://maven.apache.org/SETTINGS/1.1.0
+                              http://maven.apache.org/xsd/settings-1.1.0.xsd"
+          xmlns="http://maven.apache.org/SETTINGS/1.1.0"
+          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <servers>
+    <server>
+      <id>maven.foreseeti.com.release</id>
+      <username>USERNAME</username>
+      <password>PASSWORD</password>
+    </server>
+    <server>
+      <id>maven.foreseeti.com.snapshot</id>
+      <username>USERNAME</username>
+      <password>PASSWORD</password>
+    </server>
+  </servers>
+</settings>
 ```
 
 ### Building a securiCAD compatible .jar file and running the unit tests
 
-If you have the above dependencies installed, you can build a securiCAD compatible `.jar` file and run the unit tests with the following command:
+If you have entered your credentials to foreseeti's maven repository, you can build a securiCAD compatible `.jar` file and run the unit tests with the following command:
 
 ```
 mvn package
