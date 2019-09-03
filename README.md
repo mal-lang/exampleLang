@@ -17,9 +17,50 @@ This project has the following structure:
 
 The [MAL compiler](https://github.com/meta-attack-language/malcompiler) compiles MAL specifications (`.mal` files) into different formats, using different backends. The reference backend generates Java code that is suitable for testing purposes and evaluating your language. The securiCAD backend generates a `.jar` file that can be used with [foreseeti](https://www.foreseeti.com/)'s products, including [securiCAD](https://www.foreseeti.com/securicad/), which is a tool that can be used to graphically create models using your language and to simulate attacks on those models.
 
-To build exampleLang, you need to have `mal-maven-plugin` installed in your local Maven repository. Follow the instructions at <https://github.com/meta-attack-language/malcompiler/blob/master/README.md> to install `mal-maven-plugin`.
+To compile exampleLang, you need to configure the OSSRH snapshot repository in `~/.m2/settings.xml`. Here is an example of how your `settings.xml` can look:
 
-To build a `.jar` file compatible with securiCAD, you need access to foreseeti's maven repository. If you have a username and a password, you need to enter them into `~/.m2/settings.xml`. Here is an example of how `settings.xml` can look:
+```xml
+<?xml version="1.0" encoding="UTF-8"?>
+<settings xsi:schemaLocation="http://maven.apache.org/SETTINGS/1.1.0
+                              http://maven.apache.org/xsd/settings-1.1.0.xsd"
+          xmlns="http://maven.apache.org/SETTINGS/1.1.0"
+          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <profiles>
+    <profile>
+      <id>ossrh</id>
+      <repositories>
+        <repository>
+          <id>ossrh</id>
+          <url>https://oss.sonatype.org/content/repositories/snapshots</url>
+          <releases>
+            <enabled>false</enabled>
+          </releases>
+          <snapshots>
+            <enabled>true</enabled>
+          </snapshots>
+        </repository>
+      </repositories>
+      <pluginRepositories>
+        <pluginRepository>
+          <id>ossrh</id>
+          <url>https://oss.sonatype.org/content/repositories/snapshots</url>
+          <releases>
+            <enabled>false</enabled>
+          </releases>
+          <snapshots>
+            <enabled>true</enabled>
+          </snapshots>
+        </pluginRepository>
+      </pluginRepositories>
+    </profile>
+  </profiles>
+  <activeProfiles>
+    <activeProfile>ossrh</activeProfile>
+  </activeProfiles>
+</settings>
+```
+
+To build a `.jar` file compatible with securiCAD, you need access to foreseeti's maven repository. If you have a username and a password, you need to enter them into `~/.m2/settings.xml`. Here is an example of how your `settings.xml` can look:
 
 ```xml
 <?xml version="1.0" encoding="UTF-8"?>
@@ -29,16 +70,74 @@ To build a `.jar` file compatible with securiCAD, you need access to foreseeti's
           xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
   <servers>
     <server>
-      <id>maven.foreseeti.com.release</id>
-      <username>USERNAME</username>
-      <password>PASSWORD</password>
+      <id>maven.foreseeti.com-release</id>
+      <username>FORESEETI_USERNAME</username>
+      <password>FORESEETI_PASSWORD</password>
     </server>
     <server>
-      <id>maven.foreseeti.com.snapshot</id>
-      <username>USERNAME</username>
-      <password>PASSWORD</password>
+      <id>maven.foreseeti.com-snapshot</id>
+      <username>FORESEETI_USERNAME</username>
+      <password>FORESEETI_PASSWORD</password>
     </server>
   </servers>
+  <profiles>
+    <profile>
+      <id>ossrh</id>
+      <repositories>
+        <repository>
+          <id>ossrh</id>
+          <url>https://oss.sonatype.org/content/repositories/snapshots</url>
+          <releases>
+            <enabled>false</enabled>
+          </releases>
+          <snapshots>
+            <enabled>true</enabled>
+          </snapshots>
+        </repository>
+      </repositories>
+      <pluginRepositories>
+        <pluginRepository>
+          <id>ossrh</id>
+          <url>https://oss.sonatype.org/content/repositories/snapshots</url>
+          <releases>
+            <enabled>false</enabled>
+          </releases>
+          <snapshots>
+            <enabled>true</enabled>
+          </snapshots>
+        </pluginRepository>
+      </pluginRepositories>
+    </profile>
+    <profile>
+      <id>foreseeti</id>
+      <repositories>
+        <repository>
+          <id>maven.foreseeti.com-release</id>
+          <url>s3://maven.foreseeti.com/release</url>
+          <releases>
+            <enabled>true</enabled>
+          </releases>
+          <snapshots>
+            <enabled>false</enabled>
+          </snapshots>
+        </repository>
+        <repository>
+          <id>maven.foreseeti.com-snapshot</id>
+          <url>s3://maven.foreseeti.com/snapshot</url>
+          <releases>
+            <enabled>false</enabled>
+          </releases>
+          <snapshots>
+            <enabled>true</enabled>
+          </snapshots>
+        </repository>
+      </repositories>
+    </profile>
+  </profiles>
+  <activeProfiles>
+    <activeProfile>ossrh</activeProfile>
+    <activeProfile>foreseeti</activeProfile>
+  </activeProfiles>
 </settings>
 ```
 
@@ -80,6 +179,9 @@ To create a new language using exampleLang as a template, you need to do the fol
   * `cp -r exampleLang/ myLang/`
 * Enter the directory of the new MAL language project
   * `cd myLang/`
+* Remove build scripts
+  * `rm -rf .buildscript`
+  * `rm .travis.yml`
 * Update `LICENSE` with a license of your choice
   * Update copyright notices to reflect your license in
     * `NOTICE`
