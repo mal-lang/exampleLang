@@ -28,17 +28,6 @@ limitations under the License.
   <version>1.0.0</version>
   <name>exampleLang</name>
 
-  <repositories>
-    <repository>
-      <id>maven.foreseeti.com.release</id>
-      <url>s3://maven.foreseeti.com/release</url>
-    </repository>
-    <repository>
-      <id>maven.foreseeti.com.snapshot</id>
-      <url>s3://maven.foreseeti.com/snapshot</url>
-    </repository>
-  </repositories>
-
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     <malcompiler.version>0.1.0-SNAPSHOT</malcompiler.version>
@@ -67,6 +56,12 @@ limitations under the License.
           <groupId>com.foreseeti</groupId>
           <artifactId>corelib</artifactId>
           <version>${corelib.version}</version>
+          <exclusions>
+            <exclusion>
+              <groupId>*</groupId>
+              <artifactId>*</artifactId>
+            </exclusion>
+          </exclusions>
         </dependency>
         <dependency>
           <groupId>com.foreseeti</groupId>
@@ -140,6 +135,12 @@ limitations under the License.
           <groupId>com.foreseeti</groupId>
           <artifactId>corelib</artifactId>
           <version>${corelib.version}</version>
+          <exclusions>
+            <exclusion>
+              <groupId>*</groupId>
+              <artifactId>*</artifactId>
+            </exclusion>
+          </exclusions>
         </dependency>
         <dependency>
           <groupId>com.foreseeti</groupId>
