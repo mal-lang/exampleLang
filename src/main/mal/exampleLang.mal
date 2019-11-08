@@ -17,25 +17,38 @@
 #version: "1.0.0"
 
 category System {
+  asset Network {
+    | access
+      -> hosts.connect
+  }
+
   asset Host {
-    | networkAccess
-      -> sshAccess
-    & sshAccess
+    | connect
+      -> access
+    | authenticate
+      -> access
+    | guessPassword
+      -> guessedPassword
+    | guessedPassword [Exponential(0.02)]
+      -> authenticate
+    & access
   }
 
   asset User {
-    | compromise
-      -> hosts.networkAccess
+    | attemptPhishing
+      -> phish
+    | phish [Exponential(0.1)]
+      -> passwords.obtain
   }
 
   asset Password {
     | obtain
-      -> host.sshAccess
+      -> host.authenticate
   }
 }
 
 associations {
-  Host [hosts] * <-- HostAccess   --> * [users] User
-  Host [host]  1 <-- HostPassword --> * [passwords] Password
-  User [user]  1 <-- UserPassword --> * [passwords] Password
+  Network [networks] * <-- NetworkAccess --> * [hosts] Host
+  Host [host] 1 <-- Credentials --> * [passwords] Password
+  User [user] 1 <-- Credentials --> * [passwords] Password
 }

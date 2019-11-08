@@ -1,179 +1,124 @@
 # exampleLang
 
-exampleLang is a MAL language intended to demonstrate the Maven project structure of a MAL language.
+exampleLang is a MAL language intended to demonstrate the Maven
+project structure of a MAL language.
 
 This project has the following structure:
 
 * The file `pom.xml` is the Maven configuration file of the project.
-* The directory `src/main/mal` contains the MAL specification `exampleLang.mal`, which is the MAL specification of exampleLang.
-* The directory `src/main/resources/icons` contains SVG icons for the assets in exampleLang.
-* The directory `src/test/java/org/mal_lang/examplelang/test` contains the unit tests of exampleLang.
+* The directory `src/main/mal` contains the MAL specification
+  `exampleLang.mal`, which is the MAL specification of exampleLang.
+* The directory `src/main/resources/icons` contains SVG icons for the
+  assets in exampleLang.
+* The directory `src/test/java/org/mal_lang/examplelang/test`
+  contains the unit tests of exampleLang.
 
 ## Apache Maven
 
-[Apache Maven](https://maven.apache.org/) is a build tool and dependency management tool for Java projects. You can read more about Maven at <https://en.wikipedia.org/wiki/Apache_Maven>. Follow the instructions at <https://maven.apache.org/download.cgi> to download Maven, and follow the instructions at <https://maven.apache.org/install.html> to install Maven.
+[Apache Maven](https://maven.apache.org/) is a build tool and
+dependency management tool for Java projects. You can read more about
+Maven at <https://en.wikipedia.org/wiki/Apache_Maven>. Follow the
+instructions at <https://maven.apache.org/download.cgi> to download
+Maven, and follow the instructions at
+<https://maven.apache.org/install.html> to install Maven.
 
 ## Building exampleLang and running the unit tests
 
-The [MAL compiler](https://github.com/meta-attack-language/malcompiler) compiles MAL specifications (`.mal` files) into different formats, using different backends. The reference backend generates Java code that is suitable for testing purposes and evaluating your language. The securiCAD backend generates a `.jar` file that can be used with [foreseeti](https://www.foreseeti.com/)'s products, including [securiCAD](https://www.foreseeti.com/securicad/), which is a tool that can be used to graphically create models using your language and to simulate attacks on those models.
+The
+[MAL compiler](https://github.com/meta-attack-language/malcompiler)
+compiles MAL specifications (`.mal` files) into different formats,
+using different backends. The reference backend generates Java code
+that is suitable for testing purposes and evaluating your language.
+The securiCAD backend generates a `.jar` file that can be used with
+[foreseeti](https://www.foreseeti.com/)'s products, including
+[securiCAD](https://www.foreseeti.com/securicad/), which is a tool
+that can be used to graphically create models using your language and
+to simulate attacks on those models.
 
-To compile exampleLang, you need to configure the OSSRH snapshot repository in `~/.m2/settings.xml`. Here is an example of how your `settings.xml` can look:
+### Building with the reference backend and running the unit tests
 
-```xml
-<?xml version="1.0" encoding="UTF-8"?>
-<settings xsi:schemaLocation="http://maven.apache.org/SETTINGS/1.1.0
-                              http://maven.apache.org/xsd/settings-1.1.0.xsd"
-          xmlns="http://maven.apache.org/SETTINGS/1.1.0"
-          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
-  <profiles>
-    <profile>
-      <id>ossrh</id>
-      <repositories>
-        <repository>
-          <id>ossrh</id>
-          <url>https://oss.sonatype.org/content/repositories/snapshots</url>
-          <releases>
-            <enabled>false</enabled>
-          </releases>
-          <snapshots>
-            <enabled>true</enabled>
-          </snapshots>
-        </repository>
-      </repositories>
-      <pluginRepositories>
-        <pluginRepository>
-          <id>ossrh</id>
-          <url>https://oss.sonatype.org/content/repositories/snapshots</url>
-          <releases>
-            <enabled>false</enabled>
-          </releases>
-          <snapshots>
-            <enabled>true</enabled>
-          </snapshots>
-        </pluginRepository>
-      </pluginRepositories>
-    </profile>
-  </profiles>
-  <activeProfiles>
-    <activeProfile>ossrh</activeProfile>
-  </activeProfiles>
-</settings>
-```
-
-To build a `.jar` file compatible with securiCAD, you need access to foreseeti's maven repository. If you have a username and a password, you need to enter them into `~/.m2/settings.xml`. Here is an example of how your `settings.xml` can look:
-
-```xml
-<?xml version="1.0" encoding="UTF-8"?>
-<settings xsi:schemaLocation="http://maven.apache.org/SETTINGS/1.1.0
-                              http://maven.apache.org/xsd/settings-1.1.0.xsd"
-          xmlns="http://maven.apache.org/SETTINGS/1.1.0"
-          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
-  <servers>
-    <server>
-      <id>maven.foreseeti.com-release</id>
-      <username>FORESEETI_USERNAME</username>
-      <password>FORESEETI_PASSWORD</password>
-    </server>
-    <server>
-      <id>maven.foreseeti.com-snapshot</id>
-      <username>FORESEETI_USERNAME</username>
-      <password>FORESEETI_PASSWORD</password>
-    </server>
-  </servers>
-  <profiles>
-    <profile>
-      <id>ossrh</id>
-      <repositories>
-        <repository>
-          <id>ossrh</id>
-          <url>https://oss.sonatype.org/content/repositories/snapshots</url>
-          <releases>
-            <enabled>false</enabled>
-          </releases>
-          <snapshots>
-            <enabled>true</enabled>
-          </snapshots>
-        </repository>
-      </repositories>
-      <pluginRepositories>
-        <pluginRepository>
-          <id>ossrh</id>
-          <url>https://oss.sonatype.org/content/repositories/snapshots</url>
-          <releases>
-            <enabled>false</enabled>
-          </releases>
-          <snapshots>
-            <enabled>true</enabled>
-          </snapshots>
-        </pluginRepository>
-      </pluginRepositories>
-    </profile>
-    <profile>
-      <id>foreseeti</id>
-      <repositories>
-        <repository>
-          <id>maven.foreseeti.com-release</id>
-          <url>s3://maven.foreseeti.com/release</url>
-          <releases>
-            <enabled>true</enabled>
-          </releases>
-          <snapshots>
-            <enabled>false</enabled>
-          </snapshots>
-        </repository>
-        <repository>
-          <id>maven.foreseeti.com-snapshot</id>
-          <url>s3://maven.foreseeti.com/snapshot</url>
-          <releases>
-            <enabled>false</enabled>
-          </releases>
-          <snapshots>
-            <enabled>true</enabled>
-          </snapshots>
-        </repository>
-      </repositories>
-    </profile>
-  </profiles>
-  <activeProfiles>
-    <activeProfile>ossrh</activeProfile>
-    <activeProfile>foreseeti</activeProfile>
-  </activeProfiles>
-</settings>
-```
-
-### Building a securiCAD compatible .jar file and running the unit tests
-
-If you have entered your credentials to foreseeti's maven repository, you can build a securiCAD compatible `.jar` file and run the unit tests with the following command:
+To compile exampleLang with the reference backend of the MAL compiler
+and then run the unit tests, execute the following command from the
+`exampleLang` directory:
 
 ```
-mvn package
+mvn test
 ```
 
-The resulting `.jar` file will be located in `target/examplelang-1.0.0.jar`.
+This will invoke the MAL compiler's reference backend to generate
+`.java` files under `target/generated-test-sources`. These `.java`
+files and the unit tests in `src/test/java` will then be compiled
+into `.class` files under `target/test-classes`. The unit tests will
+then finally be executed.
 
-### Only building a securiCAD compatible .jar file
-
-If you don't want to run the unit tests, you can build a securiCAD compatible `.jar` file with the following command:
-
-```
-mvn package -P build-only
-```
-
-The resulting `.jar` file will be located in `target/examplelang-1.0.0.jar`.
-
-### Only running the unit tests
-
-If you don't want to build a securiCAD compatible `.jar` file, you can run the unit tests with the following command:
+To only compile exampleLang into `.java` files, execute the following
+command:
 
 ```
-mvn test -P test-only
+mvn generate-test-sources
 ```
 
-There will be no resulting `.jar` file from this command.
+To compile exampleLang into `.java` files and then compile these
+`.java` files and the unit tests in `src/test/java` into `.class`
+files, execute the following command:
+
+```
+mvn test-compile
+```
+
+To run a specific test class, execute the following command:
+
+```
+mvn test -Dtest=TestExampleLang
+```
+
+Where `TestExampleLang` is the test class.
+
+To run a specific test method in a test class, execute the following
+command:
+
+```
+mvn test -Dtest=TestExampleLang#testNoPassword
+```
+
+Where `TestExampleLang` is the test class and `testNoPassword` is the
+test method.
+
+### Building a securiCAD compatible .jar file
+
+To build a securiCAD compatible `.jar` file, you need access to
+foreseeti's maven repository. To request access, please contact
+<support@foreseeti.com>. When you have received your credentials, you
+can store them in a file `~/.aws/credentials`
+(`%UserProfile%\.aws\credentials` on windows). For example:
+
+```
+[default]
+aws_access_key_id=AKIAIOSFODNN7EXAMPLE
+aws_secret_access_key=wJalrXUtnFEMI/K7MDENG/bPxRfiCYEXAMPLEKEY
+```
+
+To compile exampleLang with the securiCAD backend of the MAL
+compiler, execute the following command:
+
+```
+mvn package -PsecuriCAD
+```
+
+The resulting `.jar` file will be located in
+`target/examplelang-1.0.0.jar`.
+
+If you don't want to run the unit tests when building a securiCAD
+compatible `.jar` file, execute the following command:
+
+```
+mvn clean package -PsecuriCAD -Dmaven.test.skip=true
+```
 
 ## Using exampleLang as a template MAL language
 
-To create a new language using exampleLang as a template, you need to do the following:
+To create a new language using exampleLang as a template, you need to
+do the following:
 
 * Create a new MAL language project using exampleLang as the template
   * `cp -r exampleLang/ myLang/`
@@ -189,7 +134,9 @@ To create a new language using exampleLang as a template, you need to do the fol
     * `pom.xml`
     * `src/main/mal/exampleLang.mal`
     * `src/test/java/org/mal_lang/examplelang/test/TestExampleLang.java`
-* Update `README.md` with relevant information about your language. Information about how to use Markdown can be found at <https://help.github.com/en/articles/basic-writing-and-formatting-syntax>.
+* Update `README.md` with relevant information about your language.
+  Information about how to use Markdown can be found at
+  <https://help.github.com/en/articles/basic-writing-and-formatting-syntax>.
 * Update `pom.xml` to reflect your project
   * Update `<groupId>` with a reverse domain name that you can use
     * Example: `com.example`
@@ -199,18 +146,21 @@ To create a new language using exampleLang as a template, you need to do the fol
     * Example: `1.0.0`
   * Update `<name>` with the name of your language
     * Example: `myLang`
-  * Update `<mal.file>` with the name of the main MAL specification of your language
+  * Update `<mal.file>` with the name of the main MAL specification
+    of your language
     * Example: `myLang.mal`
-  * Update `<mal.securicad.package>` with the package name of your language
+  * Update `<mal.securicad.package>` with the package name of your
+    language
     * Example: `com.example.mylang`
-  * Update `<mal.reference.package>` with the test package name of your language
+  * Update `<mal.reference.package>` with the test package name of
+    your language
     * Example: `com.example.mylang.test`
-* Rename `src/main/mal/exampleLang.mal` to the name of the main MAL specification of your language
+* Rename `src/main/mal/exampleLang.mal` to the name of the main MAL
+  specification of your language
   * `mv src/main/mal/exampleLang.mal src/main/mal/myLang.mal`
 * Update your main MAL specification's `#id` and `#version`
   * Example: `#id: "com.example.mylang"`, `#version: "1.0.0"`
-* Rename `src/test/java/org/mal_lang/examplelang/test/TestExampleLang.java` to reflect your language
-  * `mkdir -p src/test/java/com/example/mylang/test`
-  * `mv src/test/java/org/mal_lang/examplelang/test/TestExampleLang.java src/test/java/com/example/mylang/test/TestMyLang.java`
-* Change the package name of the unit tests to the test package name of your language
+* Rename unit tests in `src/test/java` to reflect your language
+* Change the package name of the unit tests to the test package name
+  of your language
   * Example: `package com.example.mylang.test;`
