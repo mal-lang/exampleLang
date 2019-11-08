@@ -6,17 +6,11 @@ BASE_DIR="$(dirname "$(dirname "$(realpath "$0")")")"
 
 cd "$BASE_DIR"
 
-echo "Executing profile 'test-only'..."
+echo "Executing default profile..."
 mvn clean install --quiet --batch-mode \
-  --settings .buildscript/settings.xml \
-  --activate-profiles test-only
+  --settings .buildscript/settings.xml
 
-echo "Executing profile 'build-only'..."
+echo "Executing profile 'securiCAD'..."
 mvn clean install --quiet --batch-mode \
   --settings .buildscript/settings.xml \
-  --activate-profiles build-only,foreseeti
-
-echo "Executing default profile 'build-and-test'..."
-mvn clean install --quiet --batch-mode \
-  --settings .buildscript/settings.xml \
-  --activate-profiles foreseeti
+  --activate-profiles securiCAD
