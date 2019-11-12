@@ -18,49 +18,25 @@ package org.mal_lang.examplelang.test;
 import core.Attacker;
 import org.junit.jupiter.api.Test;
 
-public class TestExampleLang extends ExampleLangTest {
-  private static class ExampleLangModel {
+public class TestGuessPassword extends ExampleLangTest {
+  private static class GuessPasswordModel {
     public final Network internet = new Network("internet");
     public final Host server = new Host("server");
-    public final Password password123 = new Password("password123");
 
-    public ExampleLangModel() {
+    public GuessPasswordModel() {
       internet.addHosts(server);
-      server.addPasswords(password123);
     }
   }
 
   @Test
-  public void testAccess() {
-    var model = new ExampleLangModel();
+  public void testGuessPassword() {
+    var model = new GuessPasswordModel();
 
     var attacker = new Attacker();
     attacker.addAttackPoint(model.internet.access);
-    attacker.addAttackPoint(model.password123.obtain);
+    attacker.addAttackPoint(model.server.guessPassword);
     attacker.attack();
 
-    model.server.access.assertCompromisedInstantaneously();
-  }
-
-  @Test
-  public void testNoPassword() {
-    var model = new ExampleLangModel();
-
-    var attacker = new Attacker();
-    attacker.addAttackPoint(model.internet.access);
-    attacker.attack();
-
-    model.server.access.assertUncompromised();
-  }
-
-  @Test
-  public void testNoNetwork() {
-    var model = new ExampleLangModel();
-
-    var attacker = new Attacker();
-    attacker.addAttackPoint(model.password123.obtain);
-    attacker.attack();
-
-    model.server.access.assertUncompromised();
+    model.server.access.assertCompromisedWithEffort();
   }
 }
