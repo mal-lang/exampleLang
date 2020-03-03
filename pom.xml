@@ -28,7 +28,7 @@ limitations under the License.
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     <maven.install.skip>true</maven.install.skip>
     <malcompiler.version>0.1.0-SNAPSHOT</malcompiler.version>
-    <kernelcad.version>1.6.1</kernelcad.version>
+    <kernelcad.version>1.6.2-SNAPSHOT</kernelcad.version>
     <corelib.version>${kernelcad.version}</corelib.version>
     <simulator.version>${kernelcad.version}</simulator.version>
     <mal.file>exampleLang.mal</mal.file>
