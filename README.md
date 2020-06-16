@@ -127,7 +127,7 @@ do the following:
 * Enter the directory of the new MAL language project
   * `cd myLang/`
 * Remove build scripts
-  * `rm -rf target/`
+  * `rm -rf target/` or `mvn clean`
 * Update `LICENSE` with a license of your choice
   * Update copyright notices to reflect your license in
     * `NOTICE`
