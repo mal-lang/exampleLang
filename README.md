@@ -37,6 +37,8 @@ to simulate attacks on those models.
 
 ### Building with the reference backend and running the unit tests
 
+Java version 11 or higher is required.
+
 To compile exampleLang with the reference backend of the MAL compiler
 and then run the unit tests, execute the following command from the
 `exampleLang` directory:
@@ -125,8 +127,7 @@ do the following:
 * Enter the directory of the new MAL language project
   * `cd myLang/`
 * Remove build scripts
-  * `rm -rf .buildscript`
-  * `rm .travis.yml`
+  * `rm -rf target/` or `mvn clean`
 * Update `LICENSE` with a license of your choice
   * Update copyright notices to reflect your license in
     * `NOTICE`
