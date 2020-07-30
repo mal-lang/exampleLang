@@ -70,9 +70,10 @@ limitations under the License.
     <kernelcad.version>1.6.2</kernelcad.version>
     <corelib.version>${kernelcad.version}</corelib.version>
     <simulator.version>${kernelcad.version}</simulator.version>
-    <mal.file>exampleLang.mal</mal.file>
+    <mal.file>main.mal</mal.file>
     <mal.securicad.package>org.mal_lang.examplelang</mal.securicad.package>
     <mal.reference.package>org.mal_lang.examplelang.test</mal.reference.package>
+    <mal.id>org.mal-lang.examplelang</mal.id>
   </properties>
 
   <dependencies>
@@ -190,11 +191,13 @@ limitations under the License.
         </plugin>
         <plugin>
           <groupId>org.apache.maven.plugins</groupId>
+          <artifactId>maven-assembly-plugin</artifactId>
+          <version>3.3.0</version>
+        </plugin>
+        <plugin>
+          <groupId>org.apache.maven.plugins</groupId>
           <artifactId>maven-install-plugin</artifactId>
           <version>3.0.0-M1</version>
-          <configuration>
-            <skip>true</skip>
-          </configuration>
         </plugin>
         <plugin>
           <groupId>org.apache.maven.plugins</groupId>
@@ -288,6 +291,24 @@ limitations under the License.
                 <goals>
                   <goal>securicad</goal>
                 </goals>
+              </execution>
+            </executions>
+          </plugin>
+          <plugin>
+            <groupId>org.apache.maven.plugins</groupId>
+            <artifactId>maven-assembly-plugin</artifactId>
+            <executions>
+              <execution>
+                <id>source-archive</id>
+                <phase>package</phase>
+                <goals>
+                  <goal>single</goal>
+                </goals>
+                <configuration>
+                  <descriptors>
+                    <descriptor>${project.basedir}/src/assembly/source.xml</descriptor>
+                  </descriptors>
+                </configuration>
               </execution>
             </executions>
           </plugin>
