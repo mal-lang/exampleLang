@@ -44,9 +44,15 @@ jobs:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
     - name: Create tag 'latest'
-      uses: rickstaa/action-create-tag@v1
+      uses: actions/github-script@v4
       with:
-        tag: latest
+        script: |
+          github.git.createRef({
+            owner: context.repo.owner,
+            repo: context.repo.repo,
+            ref: "refs/tags/latest",
+            sha: context.sha,
+          });
 
     - name: Create release 'latest'
       uses: softprops/action-gh-release@v1
