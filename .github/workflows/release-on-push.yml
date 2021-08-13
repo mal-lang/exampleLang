@@ -1,0 +1,60 @@
+name: Release on Push
+on:
+  push:
+    branches:
+    - master
+jobs:
+  release-on-push:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v2
+      with:
+        persist-credentials: false
+
+    - name: Set up JDK
+      uses: actions/setup-java@v2
+      with:
+        distribution: adopt
+        java-version: 11
+        check-latest: true
+
+    - name: Configure AWS Credentials
+      uses: aws-actions/configure-aws-credentials@v1
+      with:
+        aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+        aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+        aws-region: eu-central-1
+
+    - name: Build jar
+      run: mvn -B clean package -PsecuriCAD
+
+    - name: Set up malc
+      run: ./tools/scripts/setup-malc.sh
+
+    - name: Build mar
+      run: cd target && malc -i ../src/main/resources/icons -l ../LICENSE -n ../NOTICE ../src/main/mal/exampleLang.mal
+
+    - name: Delete previous tag and release 'latest'
+      uses: dev-drprasad/delete-tag-and-release@v0.2.0
+      with:
+        delete_release: true
+        tag_name: latest
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+    - name: Create tag 'latest'
+      uses: rickstaa/action-create-tag@v1
+      with:
+        tag: latest
+
+    - name: Create release 'latest'
+      uses: softprops/action-gh-release@v1
+      with:
+        prerelease: true
+        files: |
+          target/examplelang-*.jar
+          target/org.mal-lang.examplelang-*.mar
+        tag_name: latest
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

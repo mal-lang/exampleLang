@@ -1,0 +1,51 @@
+name: Release on Tag
+on:
+  push:
+    tags:
+    - release/*
+jobs:
+  release-on-tag:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v2
+      with:
+        persist-credentials: false
+
+    - name: Create Release Name
+      run: |
+        echo "${{ github.ref }}" | sed "s|^refs/tags/release/\(.*\)$|release_name=\1|" >> $GITHUB_ENV
+      shell: bash
+
+    - name: Set up JDK
+      uses: actions/setup-java@v2
+      with:
+        distribution: adopt
+        java-version: 11
+        check-latest: true
+
+    - name: Configure AWS Credentials
+      uses: aws-actions/configure-aws-credentials@v1
+      with:
+        aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+        aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+        aws-region: eu-central-1
+
+    - name: Build jar
+      run: mvn -B clean package -PsecuriCAD
+
+    - name: Set up malc
+      run: ./tools/scripts/setup-malc.sh
+
+    - name: Build mar
+      run: cd target && malc -i ../src/main/resources/icons -l ../LICENSE -n ../NOTICE ../src/main/mal/exampleLang.mal
+
+    - name: Create release
+      uses: softprops/action-gh-release@v1
+      with:
+        files: |
+          target/examplelang-*.jar
+          target/org.mal-lang.examplelang-*.mar
+        name: ${{ env.release_name }}
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

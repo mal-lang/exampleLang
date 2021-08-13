@@ -30,8 +30,8 @@ compiles MAL specifications (`.mal` files) into different formats,
 using different backends. The reference backend generates Java code
 that is suitable for testing purposes and evaluating your language.
 The securiCAD backend generates a `.jar` file that can be used with
-[foreseeti](https://www.foreseeti.com/)'s products, including
-[securiCAD](https://www.foreseeti.com/securicad/), which is a tool
+[foreseeti](https://foreseeti.com)'s products, including
+[securiCAD](https://foreseeti.com/securicad), which is a tool
 that can be used to graphically create models using your language and
 to simulate attacks on those models.
 
@@ -124,12 +124,10 @@ do the following:
   * `cp -r exampleLang/ myLang/`
 * Enter the directory of the new MAL language project
   * `cd myLang/`
-* Remove build scripts
-  * `rm -rf .buildscript`
-  * `rm .travis.yml`
 * Update `LICENSE` with a license of your choice
   * Update copyright notices to reflect your license in
     * `NOTICE`
+    * `README.md`
     * `pom.xml`
     * `src/main/mal/exampleLang.mal`
     * `src/test/java/org/mal_lang/examplelang/test/*.java`
@@ -166,7 +164,7 @@ do the following:
 
 ## License
 
-Copyright © 2020 [Foreseeti AB](https://www.foreseeti.com/)
+Copyright © 2020-2021 [Foreseeti AB](https://foreseeti.com)
 
 All files distributed in the exampleLang project are licensed under the [Apache License, Version 2.0](https://www.apache.org/licenses/LICENSE-2.0), except for the following files:
 
