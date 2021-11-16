@@ -86,7 +86,7 @@ test method.
 
 ### Building a securiCAD compatible .jar file
 
-In order to use your language with foreseeti’s products, it is necessary to build a securiCAD-compatible .jar file and to obtain a copy of the securiCAD software. 
+In order to use your language with foreseeti’s products, it is necessary to build a securiCAD-compatible `.jar` file and to obtain a copy of the securiCAD software. 
 
 foreseeti offers a free version of the securiCAD Professional tool for MAL developers. Sign up [here](https://foreseeti.com/foreseeti-getting-started/) to get access to the securiCAD Professional tool as well as instruction on how to access the foreseeti Maven repository. 
 
