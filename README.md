@@ -86,17 +86,9 @@ test method.
 
 ### Building a securiCAD compatible .jar file
 
-To build a securiCAD compatible `.jar` file, you need access to
-foreseeti's maven repository. To request access, please contact
-<support@foreseeti.com>. When you have received your credentials, you
-can store them in a file `~/.aws/credentials`
-(`%UserProfile%\.aws\credentials` on windows). For example:
+In order to use your language with foreseeti’s products, it is necessary to build a securiCAD-compatible `.jar` file and to obtain a copy of the securiCAD software. 
 
-```
-[default]
-aws_access_key_id=AKIAIOSFODNN7EXAMPLE
-aws_secret_access_key=wJalrXUtnFEMI/K7MDENG/bPxRfiCYEXAMPLEKEY
-```
+foreseeti offers a free version of the securiCAD Professional tool for MAL developers. Sign up [here](https://foreseeti.com/foreseeti-getting-started/) to get access to the securiCAD Professional tool as well as instruction on how to access the foreseeti Maven repository. 
 
 To compile exampleLang with the securiCAD backend of the MAL
 compiler, execute the following command:
