@@ -1,5 +1,5 @@
 /*
- * Copyright 2020-2021 Foreseeti AB <https://foreseeti.com>
+ * Copyright 2020-2022 Foreseeti AB <https://foreseeti.com>
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
