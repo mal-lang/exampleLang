@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!--
-Copyright 2020-2021 Foreseeti AB <https://foreseeti.com>
+Copyright 2020-2022 Foreseeti AB <https://foreseeti.com>
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
@@ -74,7 +74,7 @@ limitations under the License.
     <maven.compiler.source>11</maven.compiler.source>
     <maven.compiler.target>11</maven.compiler.target>
     <malcompiler.version>0.1.0-SNAPSHOT</malcompiler.version>
-    <kernelcad.version>1.6.2</kernelcad.version>
+    <kernelcad.version>1.6.4</kernelcad.version>
     <corelib.version>${kernelcad.version}</corelib.version>
     <simulator.version>${kernelcad.version}</simulator.version>
     <mal.file>exampleLang.mal</mal.file>
@@ -86,7 +86,7 @@ limitations under the License.
     <dependency>
       <groupId>org.junit.jupiter</groupId>
       <artifactId>junit-jupiter</artifactId>
-      <version>5.7.2</version>
+      <version>5.8.2</version>
       <scope>test</scope>
     </dependency>
   </dependencies>
@@ -170,7 +170,7 @@ limitations under the License.
         <plugin>
           <groupId>org.apache.maven.plugins</groupId>
           <artifactId>maven-compiler-plugin</artifactId>
-          <version>3.8.1</version>
+          <version>3.9.0</version>
           <configuration>
             <compilerArgs>
               <arg>-Xlint:all,-cast,-path,-processing</arg>
@@ -188,7 +188,7 @@ limitations under the License.
         <plugin>
           <groupId>org.apache.maven.plugins</groupId>
           <artifactId>maven-jar-plugin</artifactId>
-          <version>3.2.0</version>
+          <version>3.2.2</version>
           <configuration>
             <skipIfEmpty>true</skipIfEmpty>
             <archive>
@@ -212,7 +212,7 @@ limitations under the License.
         <plugin>
           <groupId>org.apache.maven.plugins</groupId>
           <artifactId>maven-deploy-plugin</artifactId>
-          <version>3.0.0-M1</version>
+          <version>3.0.0-M2</version>
           <configuration>
             <skip>true</skip>
           </configuration>

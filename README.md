@@ -156,7 +156,7 @@ do the following:
 
 ## License
 
-Copyright © 2020-2021 [Foreseeti AB](https://foreseeti.com)
+Copyright © 2020-2022 [Foreseeti AB](https://foreseeti.com)
 
 All files distributed in the exampleLang project are licensed under the [Apache License, Version 2.0](https://www.apache.org/licenses/LICENSE-2.0), except for the following files:
 
