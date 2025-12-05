@@ -29,11 +29,6 @@ The
 compiles MAL specifications (`.mal` files) into different formats,
 using different backends. The reference backend generates Java code
 that is suitable for testing purposes and evaluating your language.
-The securiCAD backend generates a `.jar` file that can be used with
-[foreseeti](https://foreseeti.com)'s products, including
-[securiCAD](https://foreseeti.com/securicad), which is a tool
-that can be used to graphically create models using your language and
-to simulate attacks on those models.
 
 ### Building with the reference backend and running the unit tests
 
@@ -84,29 +79,6 @@ mvn test -Dtest=TestExampleLang#testNoPassword
 Where `TestExampleLang` is the test class and `testNoPassword` is the
 test method.
 
-### Building a securiCAD compatible .jar file
-
-In order to use your language with foreseeti’s products, it is necessary to build a securiCAD-compatible `.jar` file and to obtain a copy of the securiCAD software. 
-
-foreseeti offers a free version of the securiCAD Professional tool for MAL developers. Sign up [here](https://foreseeti.com/foreseeti-getting-started/) to get access to the securiCAD Professional tool as well as instruction on how to access the foreseeti Maven repository. 
-
-To compile exampleLang with the securiCAD backend of the MAL
-compiler, execute the following command:
-
-```
-mvn package -PsecuriCAD
-```
-
-The resulting `.jar` file will be located in
-`target/examplelang-1.0.0.jar`.
-
-If you don't want to run the unit tests when building a securiCAD
-compatible `.jar` file, execute the following command:
-
-```
-mvn clean package -PsecuriCAD -Dmaven.test.skip=true
-```
-
 ## Using exampleLang as a template MAL language
 
 To create a new language using exampleLang as a template, you need to
@@ -138,9 +110,6 @@ do the following:
   * Update `<mal.file>` with the name of the main MAL specification
     of your language
     * Example: `myLang.mal`
-  * Update `<mal.securicad.package>` with the package name of your
-    language
-    * Example: `com.example.mylang`
   * Update `<mal.reference.package>` with the test package name of
     your language
     * Example: `com.example.mylang.test`
