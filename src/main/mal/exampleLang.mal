@@ -1,54 +1,49 @@
-/*
- * Copyright 2020-2022 Foreseeti AB <https://foreseeti.com>
- *
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
- *
- *     https://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
- */
-#id: "org.mal-lang.examplelang"
-#version: "1.0.0"
+#id: "exampleLang"
+#version: "2.0.0"
 
-category System {
-  asset Network {
-    | access
-      -> hosts.connect
-  }
+category example {
 
-  asset Host {
-    | connect
-      -> access
-    | authenticate
-      -> access
-    | guessPassword
-      -> guessedPassword
-    | guessedPassword [Exponential(0.02)]
-      -> authenticate
-    & access
-  }
+    asset Machine {
+        | connect
+            -> authCompromise
 
-  asset User {
-    | attemptPhishing
-      -> phish
-    | phish [Exponential(0.1)]
-      -> passwords.obtain
-  }
+        | authenticate
+            -> authCompromise
 
-  asset Password {
-    | obtain
-      -> host.authenticate
-  }
+        & authCompromise
+            -> compromise
+
+        | compromise
+            -> storesCreds.access,
+               networks.communicate
+    }
+
+    asset Credentials {
+        | access
+            -> useUnencrypted,
+               crack
+
+        & useUnencrypted
+            -> use
+
+        | crack [HardAndCertain]
+            -> use
+
+        | use
+            -> authenticates.authenticate
+
+        # encrypted
+            -> useUnencrypted
+    }
+
+    asset Network {
+        | communicate
+            -> parties.connect
+    }
 }
 
 associations {
-  Network [networks] * <-- NetworkAccess --> * [hosts] Host
-  Host [host] 1 <-- Credentials --> * [passwords] Password
-  User [user] 1 <-- Credentials --> * [passwords] Password
+    Machine [parties] * <-- Communication --> * [networks] Network
+    Machine [storedOn] * <-- Storage --> * [storesCreds] Credentials
+    Machine [authenticates] * <-- Access --> * [authCreds] Credentials
 }
