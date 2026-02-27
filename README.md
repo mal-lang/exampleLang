@@ -8,16 +8,10 @@ This project structure is optimized for modern MAL development workflows, which 
 
 ## 🛠️ Tooling and Compilation
 
-All necessary tools for compiling, analyzing, and working with MAL languages are centralized in the MAL ecosystem.
+All necessary tools for working with MAL languages are centralized in the MAL ecosystem.
 
 ### MAL Toolbox
 
 For all development, compilation, and integration with analysis environments (such as Python), please refer to the main repository:
 
 * **MAL Toolbox Repository:** [https://github.com/mal-lang/mal-toolbox](https://github.com/mal-lang/mal-toolbox)
-
-### Compiling Your Language
-
-A detailed, step-by-step tutorial on how to compile a MAL language specification is available here:
-
-* **Compilation Tutorial:** [https://github.com/mal-lang/mal-toolbox-tutorial?tab=readme-ov-file#compiling-a-language](https://github.com/mal-lang/mal-toolbox-tutorial?tab=readme-ov-file#compiling-a-language)
