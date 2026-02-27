@@ -17,7 +17,7 @@
 #id: "exampleLang"
 #version: "2.0.0"
 
-category example {
+category System {
 
     asset Machine {
         | connect
@@ -60,6 +60,6 @@ category example {
 
 associations {
     Machine [parties] * <-- Communication --> * [networks] Network
-    Machine [storedOn] * <-- Storage --> * [storesCreds] Credentials
-    Machine [authenticates] * <-- Access --> * [authCreds] Credentials
+    Machine [storedOn] 0..1 <-- Storage --> * [storesCreds] Credentials
+    Machine [authenticates] 0..1 <-- Access --> * [authCreds] Credentials
 }
